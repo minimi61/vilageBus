@@ -1,21 +1,60 @@
-import React, { useState } from 'react'
-import data from '../data/1bus/weekday.json'
+import React, { useEffect, useState } from 'react'
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
+// import styled from 'styled-components/native'
+import Bus1Week from '../data/1bus/weekday.json'
+import Bus1Sat from '../data/1bus/saturday.json'
+import Bus1Sun from '../data/1bus/sunday.json'
+import ShowTime from '../components/ShowTime';
+
 
 export const GetTimeMs = () => {
-    const [scheduleTime, setScheduleTime] = useState()
     const date = new Date()
+    const [scheduleTime, setScheduleTime] = useState()
+    
+    let scheduleData
+
+    if (date.getDay() >= 1 && date.getDay() <= 5) { scheduleData = Bus1Week }
+    if (date.getDay() === 6) { scheduleData = Bus1Sat }
+    if (date.getDay() === 0) { scheduleData = Bus1Sun}
+        
     const toMs = (hr, min) => (hr * 60 * 60 + min * 60) * 1000
     console.log('현재시간:', toMs(date.getHours(), date.getMinutes()))
+    
     const nowTime = toMs(date.getHours(), date.getMinutes())
-    const aa = data[1][2].split(':')
-    const dateTime = toMs(Number(aa[0]), Number(aa[1]))
-
-    console.log(dateTime, nowTime)
-
-    for (let i = 0; i < data.length; i++) {
-        console.log(data[i])
+    let nextTime = []
+    // setInterval(nowTime, 1000)
+    for (let i = 0; i < scheduleData.length; i++) {
+        console.log(scheduleData[i])
+        let splitData = scheduleData[i].split(':')
+        if (toMs(Number(splitData[0]), Number(splitData[1])) >= nowTime) {
+            // nearTime.push(scheduleData[i+1])
+            // break;
+            nextTime.push(scheduleData[i])
+        }
     }
+    let commingTime = nextTime.slice(1)
+
     return (
-        <div>날짜 나옵니다</div>
+        <View>
+            {/* <NextContainer> */}
+                <Text>{nextTime[0]}</Text>
+            {/* </NextContainer> */}
+
+            {/* <View contentContainerStyle={{flexGrow: 1}}> */}
+                {commingTime.map((time, idx) => {
+                    return <ShowTime time={time} key={idx}  />
+                })}
+            {/* </View> */}
+        </View>
     )
 }
+// const NextContainer = styled.View`
+//    align-items: center;
+//    padding: 1rem;
+
+// `
+// const CommingContainer = styled.ScrollView`
+//     width: 300px;
+//     height: 300px;
+//     background-color: lightblue;
+// `
