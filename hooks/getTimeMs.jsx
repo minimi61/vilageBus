@@ -24,7 +24,6 @@ export const GetTimeMs = () => {
     let nextTime = []
     // setInterval(nowTime, 1000)
     for (let i = 0; i < scheduleData.length; i++) {
-        console.log(scheduleData[i])
         let splitData = scheduleData[i].split(':')
         if (toMs(Number(splitData[0]), Number(splitData[1])) >= nowTime) {
             // nearTime.push(scheduleData[i+1])
@@ -36,15 +35,15 @@ export const GetTimeMs = () => {
 
     return (
         <View>
-            {/* <NextContainer> */}
+            <View style={styles.container}>
                 <Text>{nextTime[0]}</Text>
-            {/* </NextContainer> */}
+            </View>
 
-            {/* <View contentContainerStyle={{flexGrow: 1}}> */}
+            <ScrollView contentContainerStyle={{flexGrow: 1}} style={styles.commingContainer}>
                 {commingTime.map((time, idx) => {
                     return <ShowTime time={time} key={idx}  />
                 })}
-            {/* </View> */}
+            </ScrollView>
         </View>
     )
 }
@@ -58,3 +57,14 @@ export const GetTimeMs = () => {
 //     height: 300px;
 //     background-color: lightblue;
 // `
+const styles = StyleSheet.create({
+    container: {
+        alignItems: 'center',
+        padding: '1rem',
+    },
+    commingContainer: {
+        width: '300px',
+        height: '300px',
+        backgroundColor: 'lightblue',
+    }
+  });

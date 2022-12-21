@@ -6,9 +6,9 @@ import { StyleSheet, Text, View } from 'react-native';
 const ShowTime = ({ time }) => {
 
   return (
-      // <ShowTimeContainer>
+    <View style={styles.showTimeContainer}>
         <Text>{time}</Text>
-      // </ShowTimeContainer>
+       </View>
   )
 }
 
@@ -18,3 +18,9 @@ export default ShowTime
 // const ShowTimeContainer = styled.View`
 //     align-items: center;
 // `
+const styles = StyleSheet.create({
+  showTimeContainer: {
+      alignItems: 'center',
+      // padding: '1rem',
+  }
+});
