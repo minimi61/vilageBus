@@ -7,19 +7,19 @@ import Bus1Sun from '../data/1bus/sunday.json'
 import ShowTime from '../components/ShowTime';
 
 
-export const GetTimeMs = () => {
-    const date = new Date()
-    const [scheduleTime, setScheduleTime] = useState()
-    
+export const GetTimeMs = ({ date }) => {
+    // const date = new Date()
+    // console.log(date)
+    // const [scheduleTime, setScheduleTime] = useState()
     let scheduleData
 
     if (date.getDay() >= 1 && date.getDay() <= 5) { scheduleData = Bus1Week }
     if (date.getDay() === 6) { scheduleData = Bus1Sat }
-    if (date.getDay() === 0) { scheduleData = Bus1Sun}
-        
+    if (date.getDay() === 0) { scheduleData = Bus1Sun }
+
     const toMs = (hr, min) => (hr * 60 * 60 + min * 60) * 1000
-    console.log('현재시간:', toMs(date.getHours(), date.getMinutes()))
-    
+    // console.log('현재시간:', toMs(date.getHours(), date.getMinutes()))
+
     const nowTime = toMs(date.getHours(), date.getMinutes())
     let nextTime = []
     // setInterval(nowTime, 1000)
@@ -39,9 +39,9 @@ export const GetTimeMs = () => {
                 <Text>{nextTime[0]}</Text>
             </View>
 
-            <ScrollView contentContainerStyle={{flexGrow: 1}} style={styles.commingContainer}>
+            <ScrollView contentContainerStyle={{ flexGrow: 1 }} style={styles.commingContainer}>
                 {commingTime.map((time, idx) => {
-                    return <ShowTime time={time} key={idx}  />
+                    return <ShowTime time={time} key={idx} />
                 })}
             </ScrollView>
         </View>
@@ -67,4 +67,4 @@ const styles = StyleSheet.create({
         height: '300px',
         backgroundColor: 'lightblue',
     }
-  });
+});

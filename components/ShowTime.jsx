@@ -7,8 +7,8 @@ const ShowTime = ({ time }) => {
 
   return (
     <View style={styles.showTimeContainer}>
-        <Text>{time}</Text>
-       </View>
+      <Text>{time}</Text>
+    </View>
   )
 }
 
@@ -20,7 +20,7 @@ export default ShowTime
 // `
 const styles = StyleSheet.create({
   showTimeContainer: {
-      alignItems: 'center',
-      // padding: '1rem',
+    alignItems: 'center',
+    // padding: '1rem',
   }
 });
