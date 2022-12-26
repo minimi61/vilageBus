@@ -7,7 +7,7 @@ import Bus1Sun from '../data/1bus/sunday.json'
 import ShowTime from '../components/ShowTime';
 
 
-export const GetTimeMs = ({ date }) => {
+const GetTimeMs = ({ date }) => {
     // const date = new Date()
     // console.log(date)
     // const [scheduleTime, setScheduleTime] = useState()
@@ -60,11 +60,13 @@ export const GetTimeMs = ({ date }) => {
 const styles = StyleSheet.create({
     container: {
         alignItems: 'center',
-        padding: '1rem',
+        padding: 1,
     },
     commingContainer: {
-        width: '300px',
-        height: '300px',
+        width: 80,
+        maxHeight: 200,
         backgroundColor: 'lightblue',
     }
 });
+
+export default GetTimeMs;
