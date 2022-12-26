@@ -18,15 +18,13 @@ export default function App() {
   useEffect(() => {
     setInterval(newDateTime, 1000)
   },[])
-
   return (
     <View style={styles.container}>   
       <Text>마을버스 시간표</Text>
       <Today />
-      {/* <NowTime hour={nowData.getHours()} minutes={nowData.getMinutes()} /> */}
-      <GetTimeMs date={nowData} />
+      <NowTime hour={nowData.getHours()} minutes={nowData.getMinutes()} />
+      <GetTimeMs date={nowData}/>
       <StatusBar style="auto" />
-      <Button/>
     </View>
   );
 }
