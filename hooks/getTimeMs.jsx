@@ -24,17 +24,23 @@ const GetTimeMs = ({ date }) => {
         let splitData = scheduleData[i].split(':')
         if (toMs(Number(splitData[0]), Number(splitData[1])) >= nowTime) {
             nextTime.push(scheduleData[i])
-            deferenceValue.push(toMs(Number(splitData[0]), Number(splitData[1]))-nowTime)
+            deferenceValue.push(toMs(Number(splitData[0]), Number(splitData[1])) - nowTime)
         }
     }
     let commingTime = nextTime.slice(1)
 
     return (
         <View>
-            <View style={styles.container}>
-                <Text>{nextTime[0]}</Text>
-            </View>
-            <Button nowTime={date} nextTime={nextTime[0]} deference={deferenceValue[0]/60000} />
+            {nextTime.length > 0 ?
+                <View style={styles.container}>
+                    <Text>버스 출발시간 : {nextTime[0]}</Text>
+                </View>
+                : <View style={styles.container}>
+                    <Text>출발 예정 버스가 없습니다</Text>
+                </View>
+            }
+
+            <Button nowTime={date} nextTime={nextTime[0]} deference={deferenceValue[0] / 60000} />
             <ScrollView contentContainerStyle={{ flexGrow: 1 }} style={styles.commingContainer}>
                 {commingTime.map((time, idx) => {
                     return <ShowTime time={time} key={idx} />
