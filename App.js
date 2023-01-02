@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import Button from './components/Button';
 import NowTime from './components/NowTime';
 import Today from './components/Today';
-import GetTimeMs from './hooks/GetTimeMs'
+import GetTimeMs from './hooks/getTimeMs'
 
 
 export default function App() {

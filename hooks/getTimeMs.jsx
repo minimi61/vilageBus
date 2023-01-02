@@ -41,7 +41,8 @@ const GetTimeMs = ({ date }) => {
             }
 
             <Button nowTime={date} nextTime={nextTime[0]} deference={deferenceValue[0] / 60000} />
-            <ScrollView contentContainerStyle={{ flexGrow: 1 }} style={styles.commingContainer}>
+            <ScrollView contentContainerStyle={{ flexGrow: 1 }}
+                style={styles.commingContainer}>
                 {commingTime.map((time, idx) => {
                     return <ShowTime time={time} key={idx} />
                 })}

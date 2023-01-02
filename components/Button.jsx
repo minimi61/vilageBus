@@ -1,7 +1,11 @@
 import React from "react";
+// import { Dimensions } from 'react-native';
 import { TouchableOpacity, Text, StyleSheet } from "react-native";
 
 const Button = ({ onPress, deference }) => {
+  // const chartHeight = Dimensions.get('window').height;
+  // const chartWidth = Dimensions.get('window')
+
   return (
     <TouchableOpacity activeOpacity={0.8} style={styles.button} onPress={onPress}>
       {deference === 0 ?
