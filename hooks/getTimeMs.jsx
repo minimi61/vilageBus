@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
-import Bus1Week from '../data/1bus/weekday.json'
-import Bus1Sat from '../data/1bus/saturday.json'
-import Bus1Sun from '../data/1bus/sunday.json'
+import { Bus1Week } from '../data/1bus/weekday'
+import { Bus1Sat } from '../data/1bus/saturday'
+import { Bus1Sun } from '../data/1bus/sunday'
+import { Bus2Week } from '../data/2bus/weekday'
+import { Bus2SatAndHoli } from '../data/2bus/saturdayAndHoliday'
+import { Bus2Sun } from '../data/2bus/sunday'
 import ShowTime from '../components/ShowTime';
 import Button from '../components/Button';
-
 
 const GetTimeMs = ({ date }) => {
     let scheduleData
@@ -16,7 +18,7 @@ const GetTimeMs = ({ date }) => {
 
     const toMs = (hr, min) => (hr * 60 * 60 + min * 60) * 1000
     // console.log('현재시간:', toMs(date.getHours(), date.getMinutes()))
-
+    // console.log(Bus1Week)
     const nowTime = toMs(date.getHours(), date.getMinutes())
     let nextTime = []
     let deferenceValue = []
