@@ -2,16 +2,20 @@ import React from "react";
 // import { Dimensions } from 'react-native';
 import { TouchableOpacity, Text, StyleSheet } from "react-native";
 
-const Button = ({ onPress, deference }) => {
+const Button = ({ onPress, deference,nowTime,nextTime }) => {
   // const chartHeight = Dimensions.get('window').height;
   // const chartWidth = Dimensions.get('window')
-
+  console.log(nowTime.getHours() < 5)
+  
   return (
     <TouchableOpacity activeOpacity={0.8} style={styles.button} onPress={onPress}>
+      {/* state로 관리하기 */}
+      {nowTime.getHours() < 5 ? <Text>05:20 첫차</Text> : null}
       {deference === 0 ?
         <Text style={styles.text}>출발 또는 곧 출발</Text> :
         <Text Text > {deference}분 후 출발</Text>
       }
+      
     </TouchableOpacity>
   );
 };
