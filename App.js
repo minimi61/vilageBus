@@ -5,19 +5,21 @@ import Button from './components/Button';
 import NowTime from './components/NowTime';
 import Today from './components/Today';
 import GetTimeMs from './hooks/getTimeMs'
-
+import { setLunarToSolar } from './hooks/holidayCalculate';
 
 export default function App() {
   const date = new Date();
   const [nowData, setNowData] = useState(date)
+  console.log(setLunarToSolar())
   const newDateTime = () => {
-    const date = new Date();
-    setNowData(date)
+    //////test용 1초 setInterval 중지 
+    //const date = new Date();
+    //setNowData(date)
     return 
   }
   useEffect(() => {
     setInterval(newDateTime, 1000)
-  },[])
+  }, [])
   return (
     <View style={styles.container}>   
       <Text>마을버스 시간표</Text>
