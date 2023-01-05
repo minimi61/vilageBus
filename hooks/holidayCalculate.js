@@ -84,29 +84,29 @@ const getBaseDate = (year, month, day) => {
   if (year < 2020 || year > 2041) {
     console.log("2020년부터 2041년까지만 확인 가능합니다.")
     }
-    if (year >= 2040) {
-        /* 기준일자 양력 2040년 1월 1일 (음력 2039년 11월 17일) */
-        solYear = 2040;
-        solMonth = 1;
-        solDay = 1;
-        lunYear = 2039;
-        lunMonth = 11;
-        lunDay = 17;
-        lunLeapMonth = 0;
-        solMonthDay[1] = 29; /* 2040 년 2월 28일 */
-        lunMonthDay = 29; /* 2039년 11월 */
-    } else if (year >= 2020) {
-        /* 기준일자 양력 2020년 1월 1일 (음력 2019년 12월 7일) */
-        solYear = 2020;
-        solMonth = 1;
-        solDay = 1;
-        lunYear = 2019;
-        lunMonth = 12;
-        lunDay = 7;
-        lunLeapMonth = 0;
-        solMonthDay[1] = 29; /* 2020 년 2월 28일 */
-        lunMonthDay = 30; /* 2019년 12월 */
-    }
+  if (year >= 2040) {
+      /* 기준일자 양력 2040년 1월 1일 (음력 2039년 11월 17일) */
+      solYear = 2040;
+      solMonth = 1;
+      solDay = 1;
+      lunYear = 2039;
+      lunMonth = 11;
+      lunDay = 17;
+      lunLeapMonth = 0;
+      solMonthDay[1] = 29; /* 2040 년 2월 28일 */
+      lunMonthDay = 29; /* 2039년 11월 */
+  } else if (year >= 2020) {
+      /* 기준일자 양력 2020년 1월 1일 (음력 2019년 12월 7일) */
+      solYear = 2020;
+      solMonth = 1;
+      solDay = 1;
+      lunYear = 2019;
+      lunMonth = 12;
+      lunDay = 7;
+      lunLeapMonth = 0;
+      solMonthDay[1] = 29; /* 2020 년 2월 28일 */
+      lunMonthDay = 30; /* 2019년 12월 */
+  }
      return {
     solYear: solYear,
     solMonth: solMonth,
@@ -118,6 +118,13 @@ const getBaseDate = (year, month, day) => {
     lunLeapMonth: lunLeapMonth,
     lunMonthDay: lunMonthDay,
   };
+}
+const myDate = (year, month, day, leapMonth) =>
+{
+    this.year = year;
+    this.month = month;
+    this.day = day;
+    this.leapMonth = leapMonth;
 }
 
 const lunarCalc = (year, month, day, leapmonth) => {
@@ -131,6 +138,9 @@ const lunarCalc = (year, month, day, leapmonth) => {
   let solMonthDay = baseDate.solMonthDay;
   let lunLeapMonth = baseDate.lunLeapMonth;
   let lunMonthDay = baseDate.lunMonthDay;
+
+  let lunIndex = lunYear - 2019;
+
   while (true) {
     if (
       year == lunYear &&
@@ -139,15 +149,15 @@ const lunarCalc = (year, month, day, leapmonth) => {
       leapmonth == lunLeapMonth
     ) {
       // 날짜가 음력과 일치하면 양력을 리턴
-      return {
-        solYear: solYear,
-        solMonth: solMonth,
-        solDay: solDay,
-        lunYear: lunYear,
-        lunMonth: lunMonth,
-        lunDay: lunDay,
-        leapMonth: lunLeapMonth == 1 // 윤달 인지를 리턴
-      };
+      return new myDate(solYear, solMonth, solDay, 0);      // return {
+      //   solYear: solYear,
+      //   solMonth: solMonth,
+      //   solDay: solDay,
+      //   lunYear: lunYear,
+      //   lunMonth: lunMonth,
+      //   lunDay: lunDay,
+      //   leapMonth: lunLeapMonth == 1 // 윤달 인지를 리턴
+      // };
     }
     // 음력 데이터 (평달 - 작은달 :1,  큰달:2 )
     // (윤달이 있는 달 - 평달이 작고 윤달도 작으면 : 3 , 평달이 작고 윤달이 크면 : 4)
@@ -155,7 +165,6 @@ const lunarCalc = (year, month, day, leapmonth) => {
     // 음력 날짜를 더한다.
  
     // 년도를 계산하기 위하여 인덱스 값 변경 1799년부터 이므로 년도에서 1799를 뺀다.
-    let lunIndex = lunYear - 2019;
     if (
       lunMonth == 12 &&
       ((lunarMonthTable[lunIndex][lunMonth - 1] == 1 && lunDay == 29) || // 작은달 말일
@@ -176,57 +185,57 @@ const lunarCalc = (year, month, day, leapmonth) => {
         lunMonthDay = 30;
       }
     }
-    // else if (lunDay == lunMonthDay) {
-    //   // 말일이라면 월과 마지막 날짜를 다시 조정한다.
-    //   if (lunarMonthTable[lunIndex][lunMonth - 1] >= 3 && lunLeapMonth == 0) {
-    //     // 윤달이라면 (배열 값이 3이상)
-    //     lunDay = 1;
-    //     lunLeapMonth = 1; // 윤달
-    //   } else {
-    //     // 평달이라면
-    //     lunMonth++;
-    //     lunDay = 1;
-    //     lunLeapMonth = 0; // 평달
-    //   }
-    //   // 월의 마지막 날짜 계산
-    //   if (lunarMonthTable[lunIndex][lunMonth - 1] == 1) {
-    //     // 평달이면서 작은달은 29일
-    //     lunMonthDay = 29;
-    //   } else if (lunarMonthTable[lunIndex][lunMonth - 1] == 2) {
-    //     // 평달이면서 큰달은 30일
-    //     lunMonthDay = 30;
-    //   } else if (lunarMonthTable[lunIndex][lunMonth - 1] == 3) {
-    //     // 윤달이 있는 달이면 (평달이 작고 윤달도 작으면 : 3)
-    //     lunMonthDay = 29;
-    //   } else if (
-    //     lunarMonthTable[lunIndex][lunMonth - 1] == 4 &&
-    //     lunLeapMonth == 0
-    //   ) {
-    //     // 윤달이 있는 달이면 (평달이 작고 윤달이 크면 : 4)  -- 평달이라면
-    //     lunMonthDay = 29;
-    //   } else if (
-    //     lunarMonthTable[lunIndex][lunMonth - 1] == 4 &&
-    //     lunLeapMonth == 1
-    //   ) {
-    //     // 윤달이 있는 달이면 (평달이 작고 윤달이 크면 : 4)  -- 윤달이라면
-    //     lunMonthDay = 30;
-    //   } else if (
-    //     lunarMonthTable[lunIndex][lunMonth - 1] == 5 &&
-    //     lunLeapMonth == 0
-    //   ) {
-    //     // 윤달이 있는 달이면 (평달이 크고 윤달이 작으면 : 5)  -- 평달이라면
-    //     lunMonthDay = 30;
-    //   } else if (
-    //     lunarMonthTable[lunIndex][lunMonth - 1] == 5 &&
-    //     lunLeapMonth == 1
-    //   ) {
-    //     // 윤달이 있는 달이면 (평달이 크고 윤달이 작으면 : 5)  -- 윤달이라면
-    //     lunMonthDay = 29;
-    //   } else if (lunarMonthTable[lunIndex][lunMonth - 1] == 6) {
-    //     // 윤달이 있는 달이면 ( 평달과 윤달이 모두 크면 : 6)
-    //     lunMonthDay = 30;
-    //   }
-    // } 
+    else if (lunDay == lunMonthDay) {
+      // 말일이라면 월과 마지막 날짜를 다시 조정한다.
+      if (lunarMonthTable[lunIndex][lunMonth - 1] >= 3 && lunLeapMonth == 0) {
+        // 윤달이라면 (배열 값이 3이상)
+        lunDay = 1;
+        lunLeapMonth = 1; // 윤달
+      } else {
+        // 평달이라면
+        lunMonth++;
+        lunDay = 1;
+        lunLeapMonth = 0; // 평달
+      }
+      // 월의 마지막 날짜 계산
+      if (lunarMonthTable[lunIndex][lunMonth - 1] == 1) {
+        // 평달이면서 작은달은 29일
+        lunMonthDay = 29;
+      } else if (lunarMonthTable[lunIndex][lunMonth - 1] == 2) {
+        // 평달이면서 큰달은 30일
+        lunMonthDay = 30;
+      } else if (lunarMonthTable[lunIndex][lunMonth - 1] == 3) {
+        // 윤달이 있는 달이면 (평달이 작고 윤달도 작으면 : 3)
+        lunMonthDay = 29;
+      } else if (
+        lunarMonthTable[lunIndex][lunMonth - 1] == 4 &&
+        lunLeapMonth == 0
+      ) {
+        // 윤달이 있는 달이면 (평달이 작고 윤달이 크면 : 4)  -- 평달이라면
+        lunMonthDay = 29;
+      } else if (
+        lunarMonthTable[lunIndex][lunMonth - 1] == 4 &&
+        lunLeapMonth == 1
+      ) {
+        // 윤달이 있는 달이면 (평달이 작고 윤달이 크면 : 4)  -- 윤달이라면
+        lunMonthDay = 30;
+      } else if (
+        lunarMonthTable[lunIndex][lunMonth - 1] == 5 &&
+        lunLeapMonth == 0
+      ) {
+        // 윤달이 있는 달이면 (평달이 크고 윤달이 작으면 : 5)  -- 평달이라면
+        lunMonthDay = 30;
+      } else if (
+        lunarMonthTable[lunIndex][lunMonth - 1] == 5 &&
+        lunLeapMonth == 1
+      ) {
+        // 윤달이 있는 달이면 (평달이 크고 윤달이 작으면 : 5)  -- 윤달이라면
+        lunMonthDay = 29;
+      } else if (lunarMonthTable[lunIndex][lunMonth - 1] == 6) {
+        // 윤달이 있는 달이면 ( 평달과 윤달이 모두 크면 : 6)
+        lunMonthDay = 30;
+      }
+    } 
     else {
       // 일 증가
       lunDay++;
@@ -239,7 +248,7 @@ const setLunarToSolar = () => {
     const date = new Date();
     const year = date.getFullYear()
     let lunarDate = lunarCalc(year, lunarHolidays[i][1], lunarHolidays[i][2], 1)
-    console.log(lunarDate)
+    // console.log(lunarDate)
   }
 }
 export {setLunarToSolar}

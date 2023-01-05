@@ -10,9 +10,10 @@ const Button = ({ onPress, deference,nowTime,nextTime,commingTime }) => {
     <TouchableOpacity activeOpacity={0.8} style={styles.button} onPress={onPress}>
       {nowTime.getHours() < 5 && <Text>05:20 첫차</Text>}
       {commingTime.length === 0 && <Text>버스 운행 종료</Text>}
-      {deference === 0 && nowTime.getHours() > 5 && commingTime.length>0?
+      { nowTime.getHours() > 5 && commingTime.length>0 ? deference === 0?
         <Text style={styles.text}>출발 또는 곧 출발</Text> :
         <Text Text > {deference}분 후 출발</Text>
+        : null
       }
       
     </TouchableOpacity>

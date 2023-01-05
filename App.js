@@ -10,11 +10,11 @@ import { setLunarToSolar } from './hooks/holidayCalculate';
 export default function App() {
   const date = new Date();
   const [nowData, setNowData] = useState(date)
-  console.log(setLunarToSolar())
+  // console.log(setLunarToSolar())
   const newDateTime = () => {
     //////test용 1초 setInterval 중지 
-    //const date = new Date();
-    //setNowData(date)
+    const date = new Date();
+    setNowData(date)
     return 
   }
   useEffect(() => {
