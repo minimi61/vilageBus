@@ -38,11 +38,10 @@ const GetTimeMs = ({ date }) => {
                     <Text>버스 출발시간 : {nextTime[0]}</Text>
                 </View>
                 : <View style={styles.container}>
-                    <Text>출발 예정 버스가 없습니다</Text>
+                    <Text>없음</Text>
                 </View>
             }
-
-            <Button nowTime={date} nextTime={nextTime[0]} deference={deferenceValue[0] / 60000} />
+            <Button nowTime={date} nextTime={nextTime[0]} deference={deferenceValue[0] / 60000} commingTime={commingTime} />
             <ScrollView contentContainerStyle={{ flexGrow: 1 }}
                 style={styles.commingContainer}>
                 {commingTime.map((time, idx) => {
