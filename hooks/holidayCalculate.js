@@ -7,7 +7,7 @@
 let solarHolidays = ['0101', '0301', '0505', '0606', '0815', '1003', '1009', '1225']
 // 음력
 let lunarHolidays =[
-  ["설 전날", 12, 0, 2],
+  // ["설 전날", 12, 0, 2],
   ["설날", 1, 1, 2],
   ["설 다음날", 1, 2, 2],
   ["석가탄신일", 4, 8, 2],
@@ -119,15 +119,8 @@ const getBaseDate = (year, month, day) => {
     lunMonthDay: lunMonthDay,
   };
 }
-const myDate = (year, month, day, leapMonth) =>
-{
-    this.year = year;
-    this.month = month;
-    this.day = day;
-    this.leapMonth = leapMonth;
-}
 
-const lunarCalc = (year, month, day, leapmonth) => {
+const calcLunar  = (year, month, day, leapmonth) => {
   let baseDate = getBaseDate(year);
   let solYear = baseDate.solYear;
   let solMonth = baseDate.solMonth;
@@ -139,7 +132,7 @@ const lunarCalc = (year, month, day, leapmonth) => {
   let lunLeapMonth = baseDate.lunLeapMonth;
   let lunMonthDay = baseDate.lunMonthDay;
 
-  let lunIndex = lunYear - 2019;
+  // let lunIndex = lunYear - 2019;
 
   while (true) {
     if (
@@ -149,22 +142,24 @@ const lunarCalc = (year, month, day, leapmonth) => {
       leapmonth == lunLeapMonth
     ) {
       // 날짜가 음력과 일치하면 양력을 리턴
-      return new myDate(solYear, solMonth, solDay, 0);      // return {
-      //   solYear: solYear,
-      //   solMonth: solMonth,
-      //   solDay: solDay,
-      //   lunYear: lunYear,
-      //   lunMonth: lunMonth,
-      //   lunDay: lunDay,
-      //   leapMonth: lunLeapMonth == 1 // 윤달 인지를 리턴
-      // };
+      // return new myDate(solYear, solMonth, solDay, 0);
+       return {
+        solYear: solYear,
+        solMonth: solMonth,
+        solDay: solDay,
+        lunYear: lunYear,
+        lunMonth: lunMonth,
+        lunDay: lunDay,
+        leapMonth: lunLeapMonth == 1 // 윤달 인지를 리턴
+      };
     }
     // 음력 데이터 (평달 - 작은달 :1,  큰달:2 )
     // (윤달이 있는 달 - 평달이 작고 윤달도 작으면 : 3 , 평달이 작고 윤달이 크면 : 4)
     // (윤달이 있는 달 - 평달이 크고 윤달이 작으면 : 5,  평달과 윤달이 모두 크면 : 6)
     // 음력 날짜를 더한다.
  
-    // 년도를 계산하기 위하여 인덱스 값 변경 1799년부터 이므로 년도에서 1799를 뺀다.
+    // 년도를 계산하기 위하여 인덱스 값 변경 2019년부터 이므로 년도에서 2019를 뺀다.
+    let lunIndex = lunYear - 2019;
     if (
       lunMonth == 12 &&
       ((lunarMonthTable[lunIndex][lunMonth - 1] == 1 && lunDay == 29) || // 작은달 말일
@@ -176,9 +171,9 @@ const lunarCalc = (year, month, day, leapmonth) => {
       lunDay = 1;
  
       // 년도가 변경되었으므로 인덱스값 조정
-      lunIndex = lunYear - 2019;
 
       // 1월의 마지막 날짜가 큰달인지 작은달인지 판단한다.
+      console.log(lunIndex,lunarMonthTable[lunIndex][lunMonth - 1])
       if (lunarMonthTable[lunIndex][lunMonth - 1] == 1) {
         lunMonthDay = 29;
       } else if (lunarMonthTable[lunIndex][lunMonth - 1] == 2) {
@@ -243,12 +238,96 @@ const lunarCalc = (year, month, day, leapmonth) => {
    }
 }
 
-const setLunarToSolar = () => {
-  for (let i = 0; i < lunarHolidays.length; i++) {
-    const date = new Date();
-    const year = date.getFullYear()
-    let lunarDate = lunarCalc(year, lunarHolidays[i][1], lunarHolidays[i][2], 1)
-    // console.log(lunarDate)
+// const setLunarToSolar = () => {
+//   // for (let i = 0; i < lunarHolidays.length; i++) {
+//     const date = new Date();
+//     const year = date.getFullYear()
+//     // let lunarDate = lunarCalc(year, lunarHolidays[i][1], lunarHolidays[i][2], 1)
+//     let lunarDate = lunarCalc(2023, 1, 1, 1)
+//     // console.log(lunarDate)
+//     let holiday = getHoliday(obj);
+//     if (holiday == null) {
+//       if (obj.dayOfWeekNum == 0) {
+//         return ["일", 0, 0, obj.dayOfWeekNum];
+//       } else if (obj.dayOfWeekNum == 6) {
+//         return ["토", 0, 0, obj.dayOfWeekNum];
+//       } else {
+//         return ["평", 0, 0, 0, obj.dayOfWeekNum];
+//       }
+//     } else {
+//       return holiday;
+//     }
+//   // }
+// }
+/**
+ * 입력한 음력 날짜로 양력 날짜 반환
+ * isLeapMonth : 입력한 음력 날짜가 윤달인가?
+ */
+function getSolar(year, month, day, isLeapMonth) {
+  var o = calcLunar(year, month, day, 2, isLeapMonth ? 1 : 0);
+  o.dayOfWeekStr = getDayOfWeekStr(o.solYear, o.solMonth, o.solDay);
+  o.dayOfWeekNum = getDayOfWeekNum(o.solYear, o.solMonth, o.solDay);
+  return o;
+}
+function isHoliday(year, month, day, isLunar, isLeapMonth) {
+  // 여기에서 getLunar나 getSolar를 호출하도록 변경해야 한다
+  // let obj = getLunar(year, month, day, isLunar ? 2 : 1, isLeapMonth ? 1 : 0);
+  let obj = null;
+  if (isLunar) {
+    obj = getSolar(year, month, day, isLeapMonth);
+  } else {
+    return console.log('양력이다')
+    // obj = getLunar(year, month, day);
+  }
+ 
+  let holiday = getHoliday(obj);
+  if (holiday == null) {
+    if (obj.dayOfWeekNum == 0) {
+      return ["일", 0, 0, obj.dayOfWeekNum];
+    } else if (obj.dayOfWeekNum == 6) {
+      return ["토", 0, 0, obj.dayOfWeekNum];
+    } else {
+      return ["평", 0, 0, 0, obj.dayOfWeekNum];
+    }
+  } else {
+    return holiday;
   }
 }
-export {setLunarToSolar}
+function getHoliday(obj) {
+  //alert(obj);
+  let i;
+  let addHolidays = ["설 전날", 12, 0, 2]; //가변적인 설 전날
+ 
+  // 전년도 12월의 마지막날짜를 읽어온다.
+  if (lunarMonthTable[obj.solYear - 1 - 2019][11] == 1) {
+    //
+    addHolidays[2] = 29;
+  } else if (lunarMonthTable[obj.solYear - 1 - 2019][11] == 2) {
+    addHolidays[2] = 30;
+  }
+  // 12월 말일이면
+  if (addHolidays[1] == obj.lunMonth && addHolidays[2] == obj.lunDay) {
+    return addHolidays; // addHolidays 객체를 리턴
+  }
+  // 배열을 반복하면서 같은지 검색
+  for (i = 0; i < lunarHolidays.length; i++) {
+    if (
+      lunarHolidays[i][3] == 1 && // 양력
+      lunarHolidays[i][1] == obj.solMonth && // 양력 월
+      lunarHolidays[i][2] == obj.solDay // 양력 일
+    ) {
+      return lunarHolidays[i]; // 리턴
+    }
+    if (
+      !obj.leapMonth && // 윤달이 아니면서
+      lunarHolidays[i][3] == 2 && // 음력
+      lunarHolidays[i][1] == obj.lunMonth && // 음력 월
+      lunarHolidays[i][2] == obj.lunDay // 음력 일
+    ) {
+      return lunarHolidays[i];
+    }
+  }
+  return null;
+}
+// export {setLunarToSolar}
+// export {isHoliday}
