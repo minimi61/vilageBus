@@ -8,6 +8,10 @@ function getLastDayOfMonth(year, month) {
   monthDay[1] = isLeapYear(year) ? 29 : 28;
   return monthDay[month - 1];
 }
+// 요일을 문자로
+function getDayOfWeekStr(year, month, day) {
+  return "일월화수목금토".charAt(getDayOfWeekNum(year, month, day));
+}
 //=======================================================================
 // 음력 데이터 (평달 - 작은달 :1,  큰달:2 )
 // (윤달이 있는 달 - 평달이 작고 윤달도 작으면 :3 , 평달이 작고 윤달이 크면 : 4)
@@ -588,8 +592,9 @@ function calcLunar(year, month, day, type, leapmonth) {
       // 년도가 변경되었으므로 인덱스값 조정
       lunIndex = lunYear - 1799;
       // 1월의 마지막 날짜가 큰달인지 작은달인지 판단한다.
-      console.log(lunarMonthTable[lunIndex][lunMonth - 1])
-      if (lunarMonthTable[lunIndex][lunMonth - 1] == 1) {
+      // if(!lunarMonthTable[lunIndex][lunMonth - 1]) return
+      if (lunarMonthTable[lunIndex][lunMonth - 1]) { console.log(lunarMonthTable[lunIndex][lunMonth - 1]) }
+      if (lunarMonthTable[lunIndex][lunMonth - 1] == 1 && !lunIndex) {
         lunMonthDay = 29;
       } else if (lunarMonthTable[lunIndex][lunMonth - 1] == 2) {
         lunMonthDay = 30;
