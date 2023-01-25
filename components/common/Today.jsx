@@ -9,7 +9,7 @@ import { Text } from 'react-native';
   const todayDate = date.getDate();
 
   return (
-    <Text>{thisYear}년 {todayMonth}월 {todayDate}일 {todayDay}요일</Text>
+    <Text style={{fontSize:24, fontWeight:'bold'}}>{thisYear}년 {todayMonth}월 {todayDate}일({todayDay})</Text>
   )
 }
 

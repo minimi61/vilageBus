@@ -1,10 +1,10 @@
 export const color = {
     //Brand Color
-    PrimaryColor: '#000000',
-    SecondaryColor: '#FFFFFF',
-    ShadeBold: '#868686',
-    ShadeRegular: '#A3A3A3',
-    ShadeLight: '#F8F8F8',
+    MainYellow: '#FDC827',
+    SecondYellow: '#F5F2EB',
+    MainNavy: '#04454D',
+    MainGreen: '#04BA71',
+    MainWhite: '#F5F2EB',
   
     //State Color
     SuccessColor: '#2F80ED',
