@@ -6,8 +6,8 @@ import { Bus1Sun } from '../data/1bus/sunday'
 import { Bus2Week } from '../data/2bus/weekday'
 import { Bus2SatAndHoli } from '../data/2bus/saturdayAndHoliday'
 import { Bus2Sun } from '../data/2bus/sunday'
-import ShowTime from '../components/ShowTime';
-import Button from '../components/Button';
+import ShowTime from '../components/common/ShowTime';
+import Button from '../components/home/time-container/BusStatus';
 
 const GetTimeMs = ({ date }) => {
     let scheduleData

@@ -592,9 +592,11 @@ function calcLunar(year, month, day, type, leapmonth) {
       // 년도가 변경되었으므로 인덱스값 조정
       lunIndex = lunYear - 1799;
       // 1월의 마지막 날짜가 큰달인지 작은달인지 판단한다.
+
+      ///error발생하는 부분
       // if(!lunarMonthTable[lunIndex][lunMonth - 1]) return
-      if (lunarMonthTable[lunIndex][lunMonth - 1]) { console.log(lunarMonthTable[lunIndex][lunMonth - 1]) }
-      if (lunarMonthTable[lunIndex][lunMonth - 1] == 1 && !lunIndex) {
+      if (lunarMonthTable[lunIndex][lunMonth - 1]) { console.log(lunarMonthTable[lunIndex][lunMonth - 1]).length }
+      if (lunarMonthTable[lunIndex][lunMonth - 1] == 1 ) {
         lunMonthDay = 29;
       } else if (lunarMonthTable[lunIndex][lunMonth - 1] == 2) {
         lunMonthDay = 30;

@@ -1,18 +1,18 @@
 import React,{useState,useEffect} from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import Button from '../components/Button';
-import NowTime from '../components/NowTime';
-import Today from '../components/Today';
-import GetTimeMs from '../hooks/getTimeMs'
-import { isHoliday } from '../hooks/copyCalendar';
+import Button from './time-container/BusStatus';
+import NowTime from '../common/NowTime';
+import Today from '../common/Today';
+import GetTimeMs from '../../hooks/getTimeMs'
+import { isHoliday } from '../../hooks/copyCalendar';
 // import { setLunarToSolar } from '../hooks/holidayCalculate';
 
 const Main = () => {
   const date = new Date();
   const [nowData, setNowData] = useState(date)
   // console.log(setLunarToSolar())
-  isHoliday(2023,1,1,2,1)
+  // isHoliday(2023,1,1,2,1)
   const newDateTime = () => {
     //////test용 1초 setInterval 중지 
     // const date = new Date();

@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react';
-import Main from './pages/Main';
+import Main from './components/home/Main';
 
 
 const App = () => {
@@ -11,4 +11,3 @@ const App = () => {
 
 export default App;
 
-//https://stackoverflow.com/questions/15191184/converting-string-time-into-milliseconds

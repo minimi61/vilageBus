@@ -1,5 +1,5 @@
 import React from 'react'
-import { todayDay } from '../hooks/todayDay';
+import { todayDay } from '../../hooks/todayDay';
 import { Text } from 'react-native';
 
  const Today = () => {
