@@ -11,6 +11,7 @@
   "dependencies": {
     "@expo/webpack-config": "^0.17.2",
     "@fortawesome/fontawesome-svg-core": "^6.2.1",
+    "@fortawesome/free-brands-svg-icons": "^6.2.1",
     "@fortawesome/free-solid-svg-icons": "^6.2.1",
     "@fortawesome/react-native-fontawesome": "^0.3.0",
     "expo": "~47.0.8",
@@ -18,7 +19,7 @@
     "react": "18.1.0",
     "react-dom": "18.1.0",
     "react-native": "0.70.5",
-    "react-native-svg": "^13.7.0",
+    "react-native-svg": "13.4.0",
     "react-native-web": "~0.18.9"
   },
   "devDependencies": {

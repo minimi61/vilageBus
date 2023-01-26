@@ -3,7 +3,7 @@ import { useState } from "react";
 // import { Dimensions } from 'react-native';
 import { TouchableOpacity, Text, StyleSheet } from "react-native";
 
-const Button = ({ onPress, deference,nowTime,nextTime,commingTime }) => {
+const BusStatus = ({ onPress, deference,nowTime,nextTime,commingTime }) => {
   // const chartHeight = Dimensions.get('window').height;
   // const chartWidth = Dimensions.get('window')
   return (
@@ -33,4 +33,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Button;
+export default BusStatus;
