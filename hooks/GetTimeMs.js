@@ -6,7 +6,7 @@ import { Bus1Sun } from '../data/1bus/sunday'
 import { Bus2Week } from '../data/2bus/weekday'
 import { Bus2SatAndHoli } from '../data/2bus/saturdayAndHoliday'
 import { Bus2Sun } from '../data/2bus/sunday'
-import ShowTime from '../components/common/ShowTime';
+import ShowTime from '../components/common/ShowTimeTable';
 import BusStatus from '../components/home/time-container/BusStatus';
 
 export const GetTimeMs = (date) => {

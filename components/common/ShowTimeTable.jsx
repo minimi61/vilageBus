@@ -3,22 +3,22 @@ import { StyleSheet, Text, View } from 'react-native';
 import { color } from '../../assets/colors';
 
 
-const ShowTime = ({ time,soonTime }) => {
-  
+const ShowTimeTable = ({ time, soonTime }) => {
+
   return (
-  <View>
-    {
-      soonTime == time ?
-        <Text style={[styles.showTimeContainer,{color: color.DeepOrange}]}>{time}</Text>
-        :
-        <Text style={[styles.showTimeContainer,{color: 'black'}]}>{time}</Text>
+    <View>
+      {
+        soonTime == time ?
+          <Text style={[styles.showTimeContainer, { color: color.DeepOrange }]}>{time}</Text>
+          :
+          <Text style={[styles.showTimeContainer, { color: 'black' }]}>{time}</Text>
       }
-  </View>
+    </View>
   )
 }
 
 
-export default ShowTime
+export default ShowTimeTable
 
 const styles = StyleSheet.create({
   showTimeContainer: {
