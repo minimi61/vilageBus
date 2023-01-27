@@ -6,7 +6,7 @@ export const color = {
     MainGreen: '#04BA71',
     MainWhite: '#F5F2EB',
     MainOrange: '#EC5F2D',
-  
+    SecondOrange : '#FF7A00',
     //Text Color
     DeepOrange: '#D7572A',
     

@@ -8,23 +8,21 @@ const BusStatus = ({ deference,nowTime,commingTime }) => {
   // const chartHeight = Dimensions.get('window').height;
   // const chartWidth = Dimensions.get('window')
   return (
-    <View style={{ width: '70%', }}>
-      {/* <View style={[styles.container]}> */}
+    <View style={{ width: '70%', height:'15%', backgroundColor:'blue'}}>
         <View style={[{ backgroundColor: color.MainGreen}]}>
           {nowTime.getHours() < 5 && <Text style={[styles.textCommon]}>05:20 첫차</Text>}
         </View>
           {commingTime.length === 0 && <Text style={[styles.textCommon]}>버스 운행 종료</Text>}
-          {nowTime.getHours() > 5 && commingTime.length>0 ? deference === 0?
-          <View style={[{ backgroundColor: color.MainGreen}]}>  
-            <Text style={[styles.text, styles.textCommon]}>출발 또는 곧 출발</Text>
+        {nowTime.getHours() > 5 && commingTime.length>0 ? deference == 0?
+          <View style={[{ backgroundColor: color.SecondOrange,height:'100%'}]}>  
+            <Text style={[styles.text, styles.textCommon,{marginTop:18}]}>출발 또는 곧 출발</Text>
           </View>
           :
-          <View style={[{ backgroundColor: color.MainGreen }]}>
-            <Text style={[styles.text, styles.textCommon]}> {deference}분 후 출발</Text>
+          <View style={[{ backgroundColor: color.MainGreen, height:'100%' }]}>
+            <Text style={[styles.text, styles.textCommon,{marginTop:18}]}> {deference}분 후 출발</Text>
           </View>
             : null
             }
-      {/* </View> */}
     </View>
   );
 };

@@ -28,7 +28,7 @@ const Main = () => {
   let commingTime = nextTime?.slice(1)
 
   useEffect(() => {
-    // setInterval(newDateTime, 1000)
+    setInterval(newDateTime, 1000)
   }, [])
   return (
   <View style={{flex: 1}}>
@@ -83,8 +83,8 @@ const Main = () => {
         <BusStatus nowTime={date} deference={deferenceValue[0] / 60000} commingTime={commingTime} />
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}
                 style={[styles.commingContainer,{width: '70%',marginTop:30}]}>
-                {commingTime.map((time, idx) => {
-                    return <ShowTime time={time} key={idx} />
+                {nextTime.map((time, idx) => {
+                  return <ShowTime nowTime={date} time={time} key={idx} soonTime={nextTime[0]} />
                 })}
         </ScrollView>
       {/* <StatusBar style="auto" /> */}
@@ -115,7 +115,9 @@ const styles = StyleSheet.create({
   commingContainer: {
     width: 80,
     maxHeight: 200,
-    backgroundColor: 'lightblue',
+    backgroundColor: '#eff0ec',
+    borderWidth: 0.5,
+    borderColor: '#494a4a'
   },
   timeText: {
     fontSize: 15,

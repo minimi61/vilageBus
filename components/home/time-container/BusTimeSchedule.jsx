@@ -3,10 +3,9 @@ import { StyleSheet, Text, View, ScrollView } from 'react-native';
 
 const BusTimeSchedule = () => {
   return (
-   <ScrollView contentContainerStyle={{ flexGrow: 1 }}
-      style={styles.commingContainer}>
+   <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
       {commingTime.map((time, idx) => {
-          return <ShowTime time={time} key={idx} />
+        return <ShowTime time={time} key={idx}  />
       })}
   </ScrollView>
   )

@@ -1,13 +1,19 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native';
+import { color } from '../../assets/colors';
 
 
-const ShowTime = ({ time }) => {
-
+const ShowTime = ({ time,soonTime }) => {
+  
   return (
-    <View style={styles.showTimeContainer}>
-      <Text>{time}</Text>
-    </View>
+  <View>
+    {
+      soonTime == time ?
+        <Text style={[styles.showTimeContainer,{color: color.DeepOrange}]}>{time}</Text>
+        :
+        <Text style={[styles.showTimeContainer,{color: 'black'}]}>{time}</Text>
+      }
+  </View>
   )
 }
 
@@ -16,7 +22,10 @@ export default ShowTime
 
 const styles = StyleSheet.create({
   showTimeContainer: {
-    alignItems: 'center',
-    padding: 10,
+    textAlign: 'center',
+    padding: 15,
+    fontSize: 18,
+    borderBottomWidth: 0.5,
+    borderColor: '#494a4a'
   }
 });

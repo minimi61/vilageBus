@@ -22,6 +22,7 @@ export const GetTimeMs = (date) => {
     const nowTime = toMs(date.getHours(), date.getMinutes())
     let nextTime = []
     let deferenceValue = []
+    
     for (let i = 0; i < scheduleData.length; i++) {
         let splitData = scheduleData[i].split(':')
         if (toMs(Number(splitData[0]), Number(splitData[1])) >= nowTime) {
