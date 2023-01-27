@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, ScrollView, TouchableOpacity, View, Button } from 'react-native';
-import { GetTimeMs } from '../../hooks/GetTimeMs';
+import { GetTimeMs } from '../../hooks/getTimeMs';
 import { isHoliday } from '../../hooks/copyCalendar';
 // import { setLunarToSolar } from '../hooks/holidayCalculate';
 import { color } from '../../assets/colors'
@@ -28,7 +28,7 @@ const Main = () => {
     setNowData(date)
     return
   }
-  const { nextTime, deferenceValue } = GetTimeMs(nowData)
+  const { nextTime, deferenceValue } = GetTimeMs(nowData, changeBusType)
   let commingTime = nextTime?.slice(1)
 
   useEffect(() => {
