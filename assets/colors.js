@@ -5,11 +5,11 @@ export const color = {
     MainNavy: '#04454D',
     MainGreen: '#04BA71',
     MainWhite: '#F5F2EB',
+    MainOrange: '#EC5F2D',
   
-    //State Color
-    SuccessColor: '#2F80ED',
-    secondary: '#ED3A3A',
-  
+    //Text Color
+    DeepOrange: '#D7572A',
+    
     //Text Color
     basic: '#000000',
     lowrank: '#868686',

@@ -7,9 +7,9 @@ import { Bus2Week } from '../data/2bus/weekday'
 import { Bus2SatAndHoli } from '../data/2bus/saturdayAndHoliday'
 import { Bus2Sun } from '../data/2bus/sunday'
 import ShowTime from '../components/common/ShowTime';
-import Button from '../components/home/time-container/BusStatus';
+import BusStatus from '../components/home/time-container/BusStatus';
 
-const GetTimeMs = ({ date }) => {
+export const GetTimeMs = (date) => {
     let scheduleData
 
     if (date.getDay() >= 1 && date.getDay() <= 5) { scheduleData = Bus1Week }
@@ -29,39 +29,25 @@ const GetTimeMs = ({ date }) => {
             deferenceValue.push(toMs(Number(splitData[0]), Number(splitData[1])) - nowTime)
         }
     }
-    let commingTime = nextTime.slice(1)
-
-    return (
-        <View>
-            {nextTime.length > 0 ?
-                <View style={styles.container}>
-                    <Text>{nextTime[0]}</Text>
-                </View>
-                : <View style={styles.container}>
-                    <Text>없음</Text>
-                </View>
-            }
-            {/* <Button nowTime={date} nextTime={nextTime[0]} deference={deferenceValue[0] / 60000} commingTime={commingTime} /> */}
-            {/* <ScrollView contentContainerStyle={{ flexGrow: 1 }}
-                style={styles.commingContainer}>
-                {commingTime.map((time, idx) => {
-                    return <ShowTime time={time} key={idx} />
-                })}
-            </ScrollView> */}
-        </View>
-    )
+    
+    return {nextTime,deferenceValue}
+    // return (
+    //     <View>
+    //         {nextTime.length > 0 ?
+    //             <View style={styles.container}>
+    //                 <Text>{nextTime[0]}</Text>
+    //             </View>
+    //             : <View style={styles.container}>
+    //                 <Text>없음</Text>
+    //             </View>
+    //         }
+    //         {/* <BusStatus nowTime={date} nextTime={nextTime[0]} deference={deferenceValue[0] / 60000} commingTime={commingTime} /> */}
+    //         {/* <ScrollView contentContainerStyle={{ flexGrow: 1 }}
+    //             style={styles.commingContainer}>
+    //             {commingTime.map((time, idx) => {
+    //                 return <ShowTime time={time} key={idx} />
+    //             })}
+    //         </ScrollView> */}
+    //     </View>
+    // )
 }
-
-const styles = StyleSheet.create({
-    container: {
-        alignItems: 'center',
-        padding: 1,
-    },
-    commingContainer: {
-        width: 80,
-        maxHeight: 200,
-        backgroundColor: 'lightblue',
-    }
-});
-
-export default GetTimeMs;

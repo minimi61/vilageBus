@@ -17,5 +17,6 @@ export default ShowTime
 const styles = StyleSheet.create({
   showTimeContainer: {
     alignItems: 'center',
+    padding: 10,
   }
 });

@@ -1,16 +1,17 @@
 import React,{useState,useEffect} from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, Touchable, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, ScrollView, TouchableOpacity, View } from 'react-native';
 import Button from './time-container/BusStatus';
 import NowTime from '../common/NowTime';
 import Today from '../common/Today';
-import GetTimeMs from '../../hooks/getTimeMs'
+import {GetTimeMs} from '../../hooks/GetTimeMs';
 import { isHoliday } from '../../hooks/copyCalendar';
 // import { setLunarToSolar } from '../hooks/holidayCalculate';
 import {color} from '../../assets/colors'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons/faArrowRight"
 import BusStatus from './time-container/BusStatus';
+import ShowTime from '../common/ShowTime';
 
 const Main = () => {
   const date = new Date();
@@ -23,6 +24,9 @@ const Main = () => {
     setNowData(date)
     return 
   }
+  const {nextTime,deferenceValue} = GetTimeMs(nowData)
+  let commingTime = nextTime?.slice(1)
+
   useEffect(() => {
     // setInterval(newDateTime, 1000)
   }, [])
@@ -56,20 +60,33 @@ const Main = () => {
       
 
       <View style={[styles.body,styles.centerAlign]}>
-        <View style={{ width: '70%', height: '20%', flexDirection:'row' }}>
-          <View style={[styles.centerAlign, { flex: 1, backgroundColor: '#64cba2' }]}>
-            <Text>현재 시간</Text>
+        <View style={{ width: '70%', height: '15%', flexDirection:'row', marginTop: -60 }}>
+          <View style={[styles.centerAlign, { flex: 1, backgroundColor: '#26C886' }]}>
+            <Text style={[styles.timeText,{color: 'white'}]}>현재 시간</Text>
             <NowTime hour={nowData.getHours()} minutes={nowData.getMinutes()} />
           </View>
-          <View style={[styles.centerAlign, { flex: 1, backgroundColor: '#64cba2' }]}>
-            <Text>버스 출발 시간</Text>
-            <GetTimeMs date={nowData}/>
+          <View style={[styles.centerAlign, { flex: 1, backgroundColor: '#26C886' }]}>
+            <Text style={[styles.timeText,{color: 'white'}]}>버스 출발 시간</Text>
+            {/* <GetTimeMs date={nowData}/> */}
+            <View>
+            {nextTime.length > 0 ?
+                <View style={styles.container}>
+                    <Text style={{marginTop: 8,color: color.DeepOrange,fontSize: 15,fontWeight: '700',  letterSpacing: 3}}>{nextTime[0]}</Text>
+                </View>
+                : <View style={styles.container}>
+                    <Text>없음</Text>
+                </View>
+            }
+            </View>
           </View>
         </View>
-        <View style={{ width: '70%', height: '20%', backgroundColor: color.MainGreen }}>
-          {/* <BusStatus/> */}
-        </View>
-        
+        <BusStatus nowTime={date} deference={deferenceValue[0] / 60000} commingTime={commingTime} />
+        <ScrollView contentContainerStyle={{ flexGrow: 1 }}
+                style={[styles.commingContainer,{width: '70%',marginTop:30}]}>
+                {commingTime.map((time, idx) => {
+                    return <ShowTime time={time} key={idx} />
+                })}
+        </ScrollView>
       {/* <StatusBar style="auto" /> */}
     </View>
   </View>
@@ -94,6 +111,15 @@ const styles = StyleSheet.create({
   centerAlign: {
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  commingContainer: {
+    width: 80,
+    maxHeight: 200,
+    backgroundColor: 'lightblue',
+  },
+  timeText: {
+    fontSize: 15,
+    fontWeight: '600'
   }
 });
 export default Main
