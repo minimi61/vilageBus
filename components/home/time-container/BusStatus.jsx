@@ -8,7 +8,7 @@ const BusStatus = ({ deference, nowTime, commingTime }) => {
   // const chartHeight = Dimensions.get('window').height;
   // const chartWidth = Dimensions.get('window')
   return (
-    <View style={{ width: '70%', height: '15%', backgroundColor: 'blue' }}>
+    <View style={{ width: '70%', height: '15%' }}>
       <View style={[{ backgroundColor: color.MainNavy }]}>
         {nowTime.getHours() < 5 && <Text style={[styles.textCommon]}>05:20 첫차</Text>}
       </View>
@@ -40,7 +40,8 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 27,
     fontWeight: '600',
-    textAlign: 'center'
+    textAlign: 'center',
+    padding:20
   }
 });
 

@@ -7,18 +7,17 @@ import { isHoliday } from '../../hooks/copyCalendar';
 import { color } from '../../assets/colors'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons/faArrowRight"
-import { faBars } from "@fortawesome/free-solid-svg-icons/faBars"
 import ShowTimeTable from '../common/ShowTimeTable';
-import RegionAccordion from './RegionAccordion';
 import BusStatus from './time-container/BusStatus';
 import NowTime from '../common/NowTime';
-import Today from '../common/Today';
 import SideBar from './menu-bar/SideBar';
+import Header from './header/Header';
 
 const Main = () => {
   const date = new Date();
   const [nowData, setNowData] = useState(date)
-  const [openMenu, setOpenMenu] = useState(false)
+  /////false로 고칠것
+  const [openMenu, setOpenMenu] = useState(true)
   const [changeBusType, setChangeBusType] = useState('one')
   // console.log(setLunarToSolar())
   // isHoliday(2023,1,1,2,1)
@@ -40,18 +39,9 @@ const Main = () => {
       {openMenu ? <SideBar openMenu={openMenu} setOpenMenu={setOpenMenu} /> : null}
 
       {/* 헤더 */}
-      <View style={styles.header}>
-        <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between', padding: 30, marginTop: 30}}>
-          <TouchableOpacity onPress={() => setOpenMenu(!openMenu)}>
-            <FontAwesomeIcon icon={faBars} size={32} />
-          </TouchableOpacity>
-          <RegionAccordion />
-        </View>
-        <View style={{ flex: 1, justifyContent: 'center', marginBottom:10}}>
-          <Today />
-        </View>
-
-      </View>
+      <Header openMenu={openMenu} setOpenMenu={setOpenMenu}/>
+      
+      {/* 1번버스,2번버스 탭 */}
       <View style={{ flex: 0.6, flexDirection: 'row' }}>
         <TouchableOpacity style={[styles.centerAlign, { flex: 1, backgroundColor: changeBusType == 'one' ? '#ffd24c' : '#fdda7985' }]} onPress={() => setChangeBusType('one')}>
           <Text style={{ textAlign: 'center', fontSize: 18, fontWeight: '600', margin: 5 }}>1번</Text>
@@ -71,6 +61,7 @@ const Main = () => {
         </TouchableOpacity>
       </View>
 
+      {/* 바디 */}
       {/* 시간비교와 버스 상태 */}
       <View style={[styles.body, styles.centerAlign]}>
         <View style={{ width: '70%', height: '15%', flexDirection: 'row', marginTop: -60 }}>
@@ -109,12 +100,6 @@ const Main = () => {
 }
 
 const styles = StyleSheet.create({
-  header: {
-    flex: 1.5,
-    backgroundColor: color.MainYellow,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   body: {
     flex: 3.5,
     backgroundColor: color.MainWhite,

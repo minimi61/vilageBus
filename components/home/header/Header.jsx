@@ -1,9 +1,34 @@
 import React from 'react'
+import { View,TouchableOpacity,StyleSheet } from 'react-native'
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
+import { faBars } from "@fortawesome/free-solid-svg-icons/faBars"
+import RegionAccordion from './RegionAccordion'
+import { color } from '../../../assets/colors'
+import Today from '../../common/Today'
 
-const Header = () => {
+const Header = ({openMenu,setOpenMenu}) => {
   return (
-    <div>Header</div>
+    <View style={styles.header}>
+    <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between', padding: 30, marginTop: 30}}>
+      <TouchableOpacity onPress={() => setOpenMenu(!openMenu)}>
+        <FontAwesomeIcon icon={faBars} size={32} />
+      </TouchableOpacity>
+      <RegionAccordion />
+    </View>
+    <View style={{ flex: 1, justifyContent: 'center', marginBottom:10}}>
+      <Today />
+    </View>
+
+  </View>
   )
 }
 
+const styles = StyleSheet.create({
+  header: {
+    flex: 1.5,
+    backgroundColor: color.MainYellow,
+    alignItems: 'center',
+    justifyContent: 'center',
+  }
+})
 export default Header
