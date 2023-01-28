@@ -1,12 +1,20 @@
 import React from 'react'
 import { Collapse, CollapseHeader, CollapseBody, AccordionList } from 'accordion-collapse-react-native';
-import { TouchableOpacity, Text, View, ScrollView, Image } from 'react-native';
+import { TouchableOpacity, Text, View, Platform } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons/faCaretDown"
 
 const RegionAccordion = () => {
     return (
-        <View style={{ width: '12%' }}>
+        <View style={{
+            width: '25%',
+            zIndex: 3,
+            position: 'absolute',
+            top: 30,
+            bottom: 0,
+            right: 20
+        }}
+        >
             <Collapse>
                 <CollapseHeader>
                     <View style={{ backgroundColor: '#f7d46c', flexDirection: 'row', justifyContent: 'space-between', borderWidth: 1, borderRadius: 5, padding: 5 }}>

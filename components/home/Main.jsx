@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, ScrollView, TouchableOpacity, View, Button } from 'react-native';
-import { GetTimeMs } from '../../hooks/getTimeMs';
+import { GetTimeMs } from '../../hooks/GetTimeMs';
 import { isHoliday } from '../../hooks/copyCalendar';
 // import { setLunarToSolar } from '../hooks/holidayCalculate';
 import { color } from '../../assets/colors'
@@ -34,19 +34,20 @@ const Main = () => {
   useEffect(() => {
     setInterval(newDateTime, 1000)
   }, [])
+
   return (
     <View style={{ flex: 1 }}>
       {openMenu ? <SideBar openMenu={openMenu} setOpenMenu={setOpenMenu} /> : null}
 
       {/* 헤더 */}
       <View style={styles.header}>
-        <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between', padding: 30 }}>
+        <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between', padding: 30, marginTop: 30}}>
           <TouchableOpacity onPress={() => setOpenMenu(!openMenu)}>
             <FontAwesomeIcon icon={faBars} size={32} />
           </TouchableOpacity>
           <RegionAccordion />
         </View>
-        <View style={{ flex: 1, justifyContent: 'flex-end', marginBottom: 30 }}>
+        <View style={{ flex: 1, justifyContent: 'center', marginBottom:10}}>
           <Today />
         </View>
 
@@ -57,7 +58,7 @@ const Main = () => {
           <View style={[styles.centerAlign, { flexDirection: 'row' }]}>
             <Text style={styles.startText}>종점</Text>
             <FontAwesomeIcon icon={faArrowRight} style={styles.text} />
-            <Text s={styles.startText}>과천역</Text>
+            <Text style={{marginLeft:10, fontSize: 15}}>과천역</Text>
           </View>
         </TouchableOpacity>
         <TouchableOpacity style={[styles.centerAlign, { flex: 1, backgroundColor: changeBusType == 'one' ? '#fdda7985' : '#ffd24c' }]} onPress={() => setChangeBusType('two')}>
@@ -65,7 +66,7 @@ const Main = () => {
           <View style={[styles.centerAlign, { flexDirection: 'row' }]}>
             <Text style={styles.startText}>종점</Text>
             <FontAwesomeIcon icon={faArrowRight} style={styles.text} />
-            <Text>정부과천청사역</Text>
+            <Text style={{marginLeft:10, fontSize: 15}}>정부과천청사역</Text>
           </View>
         </TouchableOpacity>
       </View>
