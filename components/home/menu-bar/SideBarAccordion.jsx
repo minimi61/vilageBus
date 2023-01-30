@@ -4,12 +4,20 @@ import { StyleSheet, Text, View, Platform, TouchableOpacity } from 'react-native
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons/faCaretDown"
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons/faChevronDown"
+import { color } from '../../../assets/colors'
 
-const SideBarAccordion = (isActive) => {
+const SideBarAccordion = ({ openMenu, setOpenMenu }) => {
   return (
-    <View style={{
-        width: '100%',
-        backgroundColor:'lightblue'
+    <TouchableOpacity onPress={() => {setOpenMenu(!openMenu)}} style={{
+        width: '55%',
+        height: '100%',
+        backgroundColor: '#80abb0',
+        zIndex: 3,
+        position: 'absolute',
+        top: 0,
+        bottom: 0,
+        left: 0,
+        right: 0
     }}
     >
       <View style={{marginTop:50, marginLeft:10}}>
@@ -87,14 +95,14 @@ const SideBarAccordion = (isActive) => {
             </CollapseBody>
       </Collapse>
       
-    </View>
+    </TouchableOpacity>
 )
 }
 
 const styles = StyleSheet.create({
   textCommon: {
     fontSize: 15,
-    marginTop:10
+    marginTop:10,
   }
 })
 export default SideBarAccordion

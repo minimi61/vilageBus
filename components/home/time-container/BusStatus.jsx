@@ -19,11 +19,11 @@ const BusStatus = ({ deference, nowTime, commingTime }) => {
       }
       {nowTime.getHours() > 5 && commingTime.length > 0 ? deference == 0 ?
         <View style={[{ backgroundColor: color.SecondOrange, height: '100%' }]}>
-          <Text style={[styles.text, styles.textCommon, { marginTop: 20 }]}>출발 또는 곧 출발</Text>
+          <Text style={[styles.text, styles.textCommon]}>출발 또는 곧 출발</Text>
         </View>
         :
         <View style={[{ backgroundColor: color.MainGreen, height: '100%' }]}>
-          <Text style={[styles.text, styles.textCommon, { marginTop: 20 }]}> {deference}분 후 출발</Text>
+          <Text style={[styles.text, styles.textCommon]}> {deference}분 후 출발</Text>
         </View>
         : null
       }

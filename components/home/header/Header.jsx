@@ -9,23 +9,19 @@ import Today from '../../common/Today'
 const Header = ({openMenu,setOpenMenu}) => {
   return (
     <View style={styles.header}>
-    <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between', padding: 30, marginTop: 30}}>
-      <TouchableOpacity onPress={() => setOpenMenu(!openMenu)}>
-        <FontAwesomeIcon icon={faBars} size={32} />
-      </TouchableOpacity>
-      <RegionAccordion />
-    </View>
-    <View style={{ flex: 1, justifyContent: 'center', marginBottom:10}}>
-      <Today />
-    </View>
-
+      <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between', padding: 30, marginTop: 30}}>
+        <TouchableOpacity onPress={() => setOpenMenu(!openMenu)}>
+          <FontAwesomeIcon icon={faBars} size={32} />
+        </TouchableOpacity>
+        <RegionAccordion />
+      </View>
+     
   </View>
   )
 }
 
 const styles = StyleSheet.create({
   header: {
-    flex: 1.5,
     backgroundColor: color.MainYellow,
     alignItems: 'center',
     justifyContent: 'center',

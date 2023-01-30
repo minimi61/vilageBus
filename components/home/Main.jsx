@@ -10,14 +10,11 @@ import { faArrowRight } from "@fortawesome/free-solid-svg-icons/faArrowRight"
 import ShowTimeTable from '../common/ShowTimeTable';
 import BusStatus from './time-container/BusStatus';
 import NowTime from '../common/NowTime';
-import SideBar from './menu-bar/SideBar';
-import Header from './header/Header';
+import Today from '../common/Today';
 
 const Main = () => {
   const date = new Date();
   const [nowData, setNowData] = useState(date)
-  /////false로 고칠것
-  const [openMenu, setOpenMenu] = useState(true)
   const [changeBusType, setChangeBusType] = useState('one')
   // console.log(setLunarToSolar())
   // isHoliday(2023,1,1,2,1)
@@ -36,65 +33,64 @@ const Main = () => {
 
   return (
     <View style={{ flex: 1 }}>
-      {openMenu ? <SideBar openMenu={openMenu} setOpenMenu={setOpenMenu} /> : null}
 
       {/* 헤더 */}
-      <Header openMenu={openMenu} setOpenMenu={setOpenMenu}/>
-      
-      {/* 1번버스,2번버스 탭 */}
-      <View style={{ flex: 0.6, flexDirection: 'row' }}>
-        <TouchableOpacity style={[styles.centerAlign, { flex: 1, backgroundColor: changeBusType == 'one' ? '#ffd24c' : '#fdda7985' }]} onPress={() => setChangeBusType('one')}>
-          <Text style={{ textAlign: 'center', fontSize: 18, fontWeight: '600', margin: 5 }}>1번</Text>
-          <View style={[styles.centerAlign, { flexDirection: 'row' }]}>
-            <Text style={styles.startText}>종점</Text>
-            <FontAwesomeIcon icon={faArrowRight} style={styles.text} />
-            <Text style={{marginLeft:10, fontSize: 15}}>과천역</Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity style={[styles.centerAlign, { flex: 1, backgroundColor: changeBusType == 'one' ? '#fdda7985' : '#ffd24c' }]} onPress={() => setChangeBusType('two')}>
-          <Text style={{ textAlign: 'center', fontSize: 18, fontWeight: '600', margin: 5 }}>2번</Text>
-          <View style={[styles.centerAlign, { flexDirection: 'row' }]}>
-            <Text style={styles.startText}>종점</Text>
-            <FontAwesomeIcon icon={faArrowRight} style={styles.text} />
-            <Text style={{marginLeft:10, fontSize: 15}}>정부과천청사역</Text>
-          </View>
-        </TouchableOpacity>
+      <View style={{justifyContent: 'center', height:'12%',backgroundColor: color.MainYellow,  alignItems: 'center',}}>
+        <Today />
       </View>
-
-      {/* 바디 */}
-      {/* 시간비교와 버스 상태 */}
-      <View style={[styles.body, styles.centerAlign]}>
-        <View style={{ width: '70%', height: '15%', flexDirection: 'row', marginTop: -60 }}>
-          <View style={[styles.centerAlign, { flex: 1, backgroundColor: '#26C886' }]}>
-            <Text style={[styles.timeText, { color: 'white' }]}>현재 시간</Text>
-            <NowTime hour={nowData.getHours()} minutes={nowData.getMinutes()} />
-          </View>
-          <View style={[styles.centerAlign, { flex: 1, backgroundColor: '#26C886' }]}>
-            <Text style={[styles.timeText, { color: 'white' }]}>버스 출발 시간</Text>
-            {/* <GetTimeMs date={nowData}/> */}
-            <View>
-              {nextTime.length > 0 ?
-                <View style={styles.container}>
-                  <Text style={{ marginTop: 8, color: color.DeepOrange, fontSize: 15, fontWeight: '700', letterSpacing: 3 }}>{nextTime[0]}</Text>
-                </View>
-                : <View style={styles.container}>
-                  <Text>없음</Text>
-                </View>
-              }
+      {/* 1번버스,2번버스 탭 */}
+        <View style={{ flex: 0.6, flexDirection: 'row' }}>
+          <TouchableOpacity style={[styles.centerAlign, { flex: 1, backgroundColor: changeBusType == 'one' ? '#ffd24c' : '#a7915385' }]} onPress={() => setChangeBusType('one')}>
+            <Text style={{ textAlign: 'center', fontSize: 18, fontWeight: '600', margin: 5 }}>1번</Text>
+            <View style={[styles.centerAlign, { flexDirection: 'row' }]}>
+              <Text style={styles.startText}>종점</Text>
+              <FontAwesomeIcon icon={faArrowRight} style={styles.text} />
+              <Text style={{marginLeft:10, fontSize: 15}}>과천역</Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity style={[styles.centerAlign, { flex: 1, backgroundColor: changeBusType == 'one' ? '#a7915385' : '#ffd24c' }]} onPress={() => setChangeBusType('two')}>
+            <Text style={{ textAlign: 'center', fontSize: 18, fontWeight: '600', margin: 5 }}>2번</Text>
+            <View style={[styles.centerAlign, { flexDirection: 'row' }]}>
+              <Text style={styles.startText}>종점</Text>
+              <FontAwesomeIcon icon={faArrowRight} style={styles.text} />
+              <Text style={{marginLeft:10, fontSize: 15}}>정부과천청사역</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
+        {/* 바디 */}
+        {/* 시간비교와 버스 상태 */}
+        <View style={[styles.body, styles.centerAlign]}>
+          <View style={{ width: '70%', height: '15%', flexDirection: 'row', marginTop: -60 }}>
+            <View style={[styles.centerAlign, { flex: 1, backgroundColor: '#26C886' }]}>
+              <Text style={[styles.timeText, { color: 'white' }]}>현재 시간</Text>
+              <NowTime hour={nowData.getHours()} minutes={nowData.getMinutes()} />
+            </View>
+            <View style={[styles.centerAlign, { flex: 1, backgroundColor: '#26C886' }]}>
+              <Text style={[styles.timeText, { color: 'white' }]}>버스 출발 시간</Text>
+              {/* <GetTimeMs date={nowData}/> */}
+              <View>
+                {nextTime.length > 0 ?
+                  <View style={styles.container}>
+                    <Text style={{ marginTop: 8, color: color.DeepOrange, fontSize: 20, fontWeight: '700', letterSpacing: 3 }}>{nextTime[0]}</Text>
+                  </View>
+                  : <View style={styles.container}>
+                    <Text>없음</Text>
+                  </View>
+                }
+              </View>
             </View>
           </View>
-        </View>
-        <BusStatus nowTime={date} deference={deferenceValue[0] / 60000} commingTime={commingTime} />
-
-        {/* 시간표 스크롤 */}
-        <ScrollView contentContainerStyle={{ flexGrow: 1 }}
-          style={[styles.commingContainer, { width: '70%', marginTop: 30 }]}>
-          {nextTime.map((time, idx) => {
-            return <ShowTimeTable nowTime={date} time={time} key={idx} soonTime={nextTime[0]} />
-          })}
-        </ScrollView>
-        {/* <StatusBar style="auto" /> */}
+          <BusStatus nowTime={date} deference={deferenceValue[0] / 60000} commingTime={commingTime} />
+          {/* 시간표 스크롤 */}
+          <ScrollView contentContainerStyle={{ flexGrow: 1 }}
+            style={[styles.commingContainer, { width: '70%', marginTop: 30 }]}>
+            {nextTime.map((time, idx) => {
+              return <ShowTimeTable nowTime={date} time={time} key={idx} soonTime={nextTime[0]} />
+            })}
+          </ScrollView>
       </View>
+        {/* <StatusBar style="auto" /> */}
+
     </View>
   );
 }

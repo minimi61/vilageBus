@@ -4,7 +4,7 @@ import { color } from '../../assets/colors';
 
 
 const ShowTimeTable = ({ time, soonTime }) => {
-
+  
   return (
     <View>
       {
