@@ -1,17 +1,31 @@
-const url = 'http://apis.data.go.kr/B090041/openapi/service/SpcdeInfoService='
-const Auth_Key = 'fS2lEqjSxbLDWk9WgGzAu71%2F6%2FcEdswoXARBwK3MgL2%2Fj%2F15RBan%2BbFuDbXQ5yuHiOnEbGySD19nB7c3gm1Zvg%3D%3D'
-// let params = {
-//   'solYear':str(2020),
-//   'solMonth':str(1).zfill(2),
-//   '_type':'json',
-//   'ServiceKey' : AUTH_KEY
-// }
-const aa = fetch(url+Auth_Key, {
-  method: "GET", // 다른 옵션도 가능합니다 (POST, PUT, DELETE, etc.)
-  // headers: {
-  //   "Content-Type": "application/json",
-  // },
-  body: JSON.stringify({}),
-});
 
-console.log(aa)
+import getEnvVars from "../environment";
+const { apiUrl } = getEnvVars();
+
+export const getHoliyday = () => {
+    let xhr = new XMLHttpRequest();
+    let holidayArr=[]
+    
+    //공휴일 api
+    let url = 'http://apis.data.go.kr/B090041/openapi/service/SpcdeInfoService/getRestDeInfo'; /*URL*/
+    let queryParams = '?' + encodeURIComponent('serviceKey') + '='+ apiUrl; /*Service Key*/
+    queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('0'); /**/
+    queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('20'); /**/
+    queryParams += '&' + encodeURIComponent('solYear') + '=' + encodeURIComponent('2023'); /**/
+    // queryParams += '&' + encodeURIComponent('solMonth') + '=' + encodeURIComponent('02'); /**/
+    queryParams += '&' + encodeURIComponent('_type') + '=' + encodeURIComponent('json'); /**/
+    xhr.open('GET', url + queryParams);
+    
+    xhr.onreadystatechange = function () {
+        //////return이 즉시호출함수에서 안됨
+        if (this.readyState == 4) {
+                let dataAndTag = this.responseText;
+                holidayArr.push(...JSON.parse(dataAndTag).response.body.items.item)
+                console.log(holidayArr)
+                return holidayArr
+            }
+            // xhr.send('');
+        };
+}
+
+

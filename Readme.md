@@ -2,3 +2,4 @@
 - npm install react-native-svg
 - npm i --save @fortawesome/react-native-fontawesome @fortawesome/fontawesome-svg-core react-native-svg
 - npm install --save accordion-collapse-react-native
+- npm install --save-dev babel-plugin-transform-inline-environment-variables
