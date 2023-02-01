@@ -13,7 +13,7 @@ import { getHoliyday } from '../../hooks/getHolidayAPI'
 const TimeTable = () => {
   ////공공 qpi
   const aa = getHoliyday()
-  console.log(aa)
+  // console.log(aa)
 
   return (
     <View>
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
   commingContainer: {
     width: 80,
     maxHeight: 500,
-    marginLeft: 50,
+    marginLeft: '15%',
     backgroundColor: '#eff0ec',
     borderWidth: 0.5,
     borderColor: '#494a4a'

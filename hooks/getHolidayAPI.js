@@ -22,7 +22,7 @@ export const getHoliyday = () => {
                 let dataAndTag = this.responseText;
                 holidayArr.push(...JSON.parse(dataAndTag).response.body.items.item)
                 console.log(holidayArr)
-                return holidayArr
+                // return holidayArr
             }
             // xhr.send('');
         };
