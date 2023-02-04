@@ -10,6 +10,8 @@ import ShowTimeTable from '../common/ShowTimeTable';
 import BusStatus from './time-container/BusStatus';
 import NowTime from '../common/NowTime';
 import Today from '../common/Today';
+import Header from './header/Header';
+import { useMyContext } from '../../hooks/contextAPI';
 
 const Main = () => {
   const date = new Date();
@@ -17,6 +19,7 @@ const Main = () => {
   const [changeBusType, setChangeBusType] = useState('one')
   // console.log(setLunarToSolar())
   // isHoliday(2023,1,1,2,1)
+
   const newDateTime = () => {
     //////test용 1초 setInterval 중지 
     const date = new Date();
@@ -32,7 +35,7 @@ const Main = () => {
 
   return (
     <View style={{ flex: 1 }}>
-
+      <Header />
       {/* 헤더 */}
       <View style={{ justifyContent: 'center', height: '12%', backgroundColor: color.MainYellow, alignItems: 'center', }}>
         <Today />

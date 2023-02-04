@@ -8,13 +8,27 @@ import { Bus2SatAndHoli } from '../../data/2bus/saturdayAndHoliday'
 import { Bus2Sun } from '../../data/2bus/sunday'
 import ShowTimeTable from '../common/ShowTimeTable'
 import { color } from '../../assets/colors'
-import { getHoliyday } from '../../hooks/getHolidayAPI'
+///////////api주소 확인 후 다시 하기
+// import { getHoliyday } from '../../hooks/getHolidayAPI'
 
-const TimeTable = () => {
+const TimeTable = ({ date }) => {
   ////공공 qpi
-  const aa = getHoliyday()
+  // const aa = getHoliyday()
   // console.log(aa)
+  let busData;
+  switch (date) {
+    case '1번평일': busData = Bus1Week;
+    case '1번토요일': busData = Bus1Sat;
+    case '1번일요일': busData = Bus1Sun;
+    case '1번공휴일': busData = Bus1Sun;
 
+    case '2번평일': busData = Bus2Week;
+    case '2번토요일': busData = Bus2SatAndHoli;
+    case '2번일요일': busData = Bus2Sun;
+    case '2번공휴일': busData = Bus2SatAndHoli;
+
+
+  }
   return (
     <View>
       <View style={{ height: '8%', flexDirection: 'row', backgroundColor: color.MainYellow }}>
